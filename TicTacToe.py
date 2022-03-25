@@ -94,11 +94,11 @@ def check_for_winner():
   #check diagonals
   diagonal_winner = check_diagonals()
   if row_winner:
-    winner = row_winner()
+    winner = row_winner
   elif column_winner:
-    winner = column_winner()
+    winner = column_winner
   elif diagonal_winner:
-    winner = diagonal_winner()
+    winner = diagonal_winner
   else:
     winner = None
   return
