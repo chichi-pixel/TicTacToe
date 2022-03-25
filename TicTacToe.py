@@ -48,17 +48,18 @@ def play_game():
 def handle_turn(player):
 
   print(player + "'s turn.")
-  position = input("Choose a position from 1-9: ")
 
   #Error!occured!if position not in ["1", "2", "3", "4", "5", "6", "7", "8", "9"]:
     #positon = input("Invalid input. Choose a position from 1-9: ")
   #valid = False
   #while not valid:
   
-  while position not in ["1", "2", "3", "4", "5", "6", "7", "8", "9"]:
-    position = input("Choose a position from 1-9: ")
-  
-    position = int(position) - 1
+  while True:
+    try:
+      position = get_input()
+      break
+    except ValueError as e:
+      print(e)
 
     #if board[position] != "-":
       #valid = True
@@ -68,6 +69,13 @@ def handle_turn(player):
   board[position] = player
 
   display_board()
+
+def get_input():
+  user_input = input("Choose a position from 1-9: ")
+  user_input = abs(int(user_input) - 1)
+  if user_input >= len(board) or board[user_input] != "-":
+    raise ValueError("Invalid position. Go again.")
+  return user_input
 
 def check_if_game_over():
   check_for_winner()
